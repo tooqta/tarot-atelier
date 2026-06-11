@@ -1217,7 +1217,7 @@ function openGem() {
   const positions = ['ปัจจุบัน','ปัญหา','แนะนำ','สรุป'];
   const prompt = (userQuestion ? `คำถามของฉัน: "${userQuestion}"\n\n` : '') +
     `ฉันจับไพ่ทาโรต์ได้ 4 ใบวันนี้ค่ะ:\n` +
-    _pendingCardIds.map((id, i) => `- ตำแหน่ง${positions[i]}: ไพ่ใบที่ ${id + 1}`).join('\n') +
+    _pendingCardIds.map((id, i) => `- ตำแหน่ง${positions[i]}: ${CARD_DATA[id]?.name||id} (${CARD_DATA[id]?.name_th||""})`).join('\n') +
     `\n\nช่วยอ่านไพ่และให้คำแนะนำหน่อยนะคะ`;
   const gemUrl = `https://gemini.google.com/gem/1qvi4MOxn4azSad0Lk-UAmO4IBemKR9IO?usp=sharing`;
   navigator.clipboard.writeText(prompt).catch(()=>{});
@@ -1349,7 +1349,7 @@ async function startReading(cardIds) {
   const loadingBubble = addBubble('🔮 เจ๊กำลังอ่านไพ่อยู่นะจ๊ะ...', 'ai loading');
 
   const prompt = (userQuestion ? `คำถามของฉันวันนี้: "${userQuestion}"\n\n` : '') +
-    `ไพ่ที่จับได้มี 4 ใบ:\nตำแหน่งปัจจุบัน: ไพ่ใบที่ ${cardIds[0]+1}\nตำแหน่งปัญหา: ไพ่ใบที่ ${cardIds[1]+1}\nตำแหน่งแนะนำ: ไพ่ใบที่ ${cardIds[2]+1}\nตำแหน่งสรุป: ไพ่ใบที่ ${cardIds[3]+1}\n\nช่วยอ่านไพ่และให้คำแนะนำหน่อยนะ`;
+    `ไพ่ที่จับได้มี 4 ใบ:\nตำแหน่งปัจจุบัน: ไพ่ใบที่ ${CARD_DATA[cardIds[0]]?.name||cardIds[0]} (${CARD_DATA[cardIds[0]]?.name_th||""})\nตำแหน่งปัญหา: ไพ่ใบที่ ${CARD_DATA[cardIds[1]]?.name||cardIds[1]} (${CARD_DATA[cardIds[1]]?.name_th||""})\nตำแหน่งแนะนำ: ไพ่ใบที่ ${CARD_DATA[cardIds[2]]?.name||cardIds[2]} (${CARD_DATA[cardIds[2]]?.name_th||""})\nตำแหน่งสรุป: ไพ่ใบที่ ${CARD_DATA[cardIds[3]]?.name||cardIds[3]} (${CARD_DATA[cardIds[3]]?.name_th||""})\n\nช่วยอ่านไพ่และให้คำแนะนำหน่อยนะ`;
 
   try {
     const reply = await callGemini(prompt);
