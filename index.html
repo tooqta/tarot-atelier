@@ -6,7 +6,7 @@
 <title>Tarot Atelier</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;500&family=Prompt:wght@300;400&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+* { margin:0; padding:0; box-sizing:border-box; h}
 
 .page { display:none; }
 .page.active { display:block; }
@@ -1104,6 +1104,15 @@ function updatePanel() {
       // ใส่รูปหลังไพ่
       const img = slot.querySelector('.flip-front img');
       if (img) img.src = cardBackImg.src;
+      // ใส่รูปหน้าไพ่
+      const cardId = deckOrder[arr[i]];
+      const imgFile = cardFiles[cardId];
+      if (imgFile) {
+        const backDiv = slot.querySelector('.flip-back');
+        if (backDiv) {
+          backDiv.innerHTML = `<img src="${CARD_BASE_URL}${imgFile}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" onerror="this.style.display='none'">`;
+        }
+      }
     } else {
       slot.classList.remove('filled');
       slot.classList.remove('flipped');
