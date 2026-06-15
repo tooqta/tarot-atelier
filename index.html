@@ -23,6 +23,26 @@
 .admin-pw-cancel{margin-top:10px;background:none;border:none;color:#8b6032;font-size:13px;cursor:pointer;font-family:inherit;}
 .admin-pw-error{color:#c0392b;font-size:13px;margin-top:6px;display:none;}
 h
+
+/* ===== CARD REVEAL MODAL ===== */
+#cardRevealModal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(20,10,5,0.85);justify-content:center;align-items:center;flex-direction:column;gap:16px;}
+#cardRevealModal.open{display:flex;}
+.reveal-card-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;animation:revealFadeIn .45s ease;}
+@keyframes revealFadeIn{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+.reveal-card-img{width:220px;height:355px;border-radius:18px;object-fit:cover;box-shadow:0 8px 40px rgba(0,0,0,0.5);border:3px solid #c9a96e;}
+.reveal-card-placeholder{width:220px;height:355px;border-radius:18px;background:linear-gradient(135deg,#efe5d6,#c9a96e);display:flex;align-items:center;justify-content:center;font-size:60px;box-shadow:0 8px 40px rgba(0,0,0,0.5);}
+.reveal-position-label{font-size:13px;color:#c9a96e;letter-spacing:2px;font-family:'Noto Serif Thai',serif;font-weight:600;}
+.reveal-card-name{font-size:22px;color:#fff8f2;font-family:'Noto Serif Thai',serif;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,0.5);text-align:center;}
+.reveal-counter{font-size:13px;color:rgba(201,169,110,0.6);}
+.reveal-btn-row{display:flex;gap:14px;margin-top:4px;}
+.reveal-next-btn,.reveal-finish-btn{padding:12px 36px;border:none;border-radius:30px;font-size:16px;font-family:'Noto Serif Thai',serif;cursor:pointer;transition:background .2s;box-shadow:0 4px 16px rgba(0,0,0,0.3);}
+.reveal-next-btn{background:#5a3e1b;color:#f5e8c8;}
+.reveal-next-btn:hover{background:#3a2a15;}
+.reveal-finish-btn{background:#7a4e2b;color:#f5e8c8;}
+.reveal-finish-btn:hover{background:#5a3a1b;}
+.reveal-dots{display:flex;gap:8px;}
+.reveal-dot{width:8px;height:8px;border-radius:50%;background:rgba(201,169,110,0.3);transition:background .3s;}
+.reveal-dot.active{background:#c9a96e;}
 /* LANDING */
 #landing {
   font-family:'Prompt',sans-serif;
@@ -1217,7 +1237,7 @@ function closeModal() {
 
 function doReading() {
   closeModal();
-  startReading(_pendingCardIds);
+  openRevealFromDeck(_pendingCardIds);
 }
 
 function openGem() {
@@ -2275,6 +2295,100 @@ function checkAdminPw(){
     document.getElementById('adminPwInput').focus();
   }
 }
+
+/* ===== CARD REVEAL LOGIC ===== */
+var _revealCards = [];
+var _revealIdx = 0;
+var _revealCallback = null;
+
+function showCardReveal(cards, onFinish) {
+  _revealCards = cards;
+  _revealIdx = 0;
+  _revealCallback = onFinish;
+  var modal = document.getElementById('cardRevealModal');
+  modal.classList.add('open');
+  buildRevealDots();
+  showRevealCard(_revealIdx);
+}
+
+function buildRevealDots() {
+  var dots = document.getElementById('revealDots');
+  dots.innerHTML = '';
+  _revealCards.forEach(function(_, i) {
+    var d = document.createElement('div');
+    d.className = 'reveal-dot' + (i === 0 ? ' active' : '');
+    dots.appendChild(d);
+  });
+}
+
+function showRevealCard(idx) {
+  var card = _revealCards[idx];
+  var wrap = document.getElementById('revealCardWrap');
+  wrap.style.animation = 'none';
+  wrap.offsetHeight;
+  wrap.style.animation = '';
+
+  document.getElementById('revealPositionLabel').textContent = card.position || '';
+  document.getElementById('revealCardName').textContent = card.name || '';
+  document.getElementById('revealCounter').textContent = (idx + 1) + ' / ' + _revealCards.length;
+
+  var holder = document.getElementById('revealImgHolder');
+  holder.innerHTML = '';
+  if (card.imgSrc) {
+    var img = document.createElement('img');
+    img.className = 'reveal-card-img';
+    img.src = card.imgSrc;
+    img.onerror = function() {
+      var ph = document.createElement('div');
+      ph.className = 'reveal-card-placeholder';
+      ph.textContent = String.fromCharCode(10024);
+      holder.replaceChild(ph, img);
+    };
+    holder.appendChild(img);
+  } else {
+    var ph = document.createElement('div');
+    ph.className = 'reveal-card-placeholder';
+    ph.textContent = String.fromCharCode(10024);
+    holder.appendChild(ph);
+  }
+
+  document.querySelectorAll('.reveal-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === idx);
+  });
+
+  var isLast = idx >= _revealCards.length - 1;
+  document.getElementById('revealNextBtn').style.display = isLast ? 'none' : '';
+  document.getElementById('revealFinishBtn').style.display = isLast ? '' : 'none';
+}
+
+function revealNext() {
+  if (_revealIdx < _revealCards.length - 1) {
+    _revealIdx++;
+    showRevealCard(_revealIdx);
+  }
+}
+
+function revealFinish() {
+  document.getElementById('cardRevealModal').classList.remove('open');
+  if (typeof _revealCallback === 'function') _revealCallback();
+}
+
+function openRevealFromDeck(cardIds) {
+  var slots = document.querySelectorAll('.slot-wrapper');
+  var cards = cardIds.map(function(id, i) {
+    var wrapper = slots[i];
+    var backImg = wrapper ? wrapper.querySelector('.flip-back img') : null;
+    var lbl = wrapper ? wrapper.querySelector('.slot-label') : null;
+    return {
+      position: lbl ? lbl.textContent.trim() : ('ใบที่ ' + (i+1)),
+      name: '',
+      imgSrc: backImg ? backImg.src : null
+    };
+  });
+  showCardReveal(cards, function() {
+    startReading(cardIds);
+  });
+}
 </script>
 
 
@@ -2333,6 +2447,21 @@ function checkAdminPw(){
   </div>
 </div>
 
+
+<!-- ===== CARD REVEAL MODAL ===== -->
+<div id="cardRevealModal">
+  <div class="reveal-dots" id="revealDots"></div>
+  <div class="reveal-card-wrap" id="revealCardWrap">
+    <div class="reveal-position-label" id="revealPositionLabel"></div>
+    <div id="revealImgHolder"></div>
+    <div class="reveal-card-name" id="revealCardName"></div>
+    <div class="reveal-counter" id="revealCounter"></div>
+    <div class="reveal-btn-row">
+      <button class="reveal-next-btn" id="revealNextBtn" onclick="revealNext()">ถัดไป ›</button>
+      <button class="reveal-finish-btn" id="revealFinishBtn" onclick="revealFinish()" style="display:none">เข้าสู่การทำนาย &#10024;</button>
+    </div>
+  </div>
+</div>
 <!-- ===== ADMIN PASSWORD MODAL ===== -->
 <div id="adminPasswordModal">
   <div class="admin-pw-box">
