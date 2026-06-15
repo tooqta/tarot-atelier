@@ -1251,7 +1251,7 @@ function openGem() {
 }
 
 
-const GEMINI_API_KEY = 'AQ.Ab8RN6JBbjuukosCyfvtZNVsq3OIZqI1m6as62RqIam5iSRYvw'; //
+
 
 const SYSTEM_PROMPT = `คุณคือ "ยิปซีสุดแซ่บ" — เจ๊อีเจ๊ พี่สาวที่ปากจัดแต่ใจดี 
 รักผู้ใช้แบบพี่สาวแท้ๆ ไม่ยอมให้ใครมาโกหกตัวเอง รวมถึงตัวผู้ใช้เอง
@@ -1292,22 +1292,22 @@ async function callGemini(userMessage) {
   conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
 
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+    'https://zbdqwhrspcrcfnidtior.supabase.co/functions/v1/gemini-tarot',
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-        contents: conversationHistory
+        question: userQuestion,
+        cards: _pendingCardIds.map((id, i) => `${cardNames[i]}: ${CARD_DATA[id]?.name_th||id}`)
       })
     }
   );
+
   const data = await res.json();
-  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ';
+  const reply = data.result || 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ';
   conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
   return reply;
 }
-
 function addBubble(text, type) {
   const area = document.getElementById('chatArea');
   const row = document.createElement('div');
