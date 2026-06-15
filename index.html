@@ -11,6 +11,18 @@
 .page { display:none; }
 .page.active { display:block; }
 h
+/* ===== ADMIN PASSWORD MODAL ===== */
+#adminPasswordModal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;}
+#adminPasswordModal.open{display:flex;}
+.admin-pw-box{background:#fff8f2;border-radius:16px;padding:36px 32px;max-width:340px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.18);text-align:center;font-family:'Noto Serif Thai',serif;}
+.admin-pw-box h2{font-size:20px;color:#5a3e1b;margin-bottom:8px;}
+.admin-pw-box p{font-size:14px;color:#8b6032;margin-bottom:20px;}
+.admin-pw-input{width:100%;padding:10px 14px;border:1.5px solid #c9a96e;border-radius:8px;font-size:15px;margin-bottom:12px;font-family:inherit;outline:none;box-sizing:border-box;}
+.admin-pw-input:focus{border-color:#5a3e1b;}
+.admin-pw-btn{width:100%;padding:11px;background:#5a3e1b;color:#f5e8c8;border:none;border-radius:8px;font-size:15px;cursor:pointer;font-family:inherit;transition:background .2s;}
+.admin-pw-btn:hover{background:#3a2a15;}
+.admin-pw-cancel{margin-top:10px;background:none;border:none;color:#8b6032;font-size:13px;cursor:pointer;font-family:inherit;}
+.admin-pw-error{color:#c0392b;font-size:13px;margin-top:6px;display:none;}
 /* LANDING */
 #landing {
   font-family:'Prompt',sans-serif;
@@ -770,7 +782,7 @@ body {
         <button onclick="showPage('deck')">เริ่มคุย</button>
         <button onclick="showPage('library')">คลังไพ่</button>
         <button onclick="showPage('booking')">จองคุย</button>
-        <button onclick="showPage('admin-tooqta')">Admin</button>
+        <button onclick="showAdminLogin()">Admin</button>
       </div>
     </header>
     <div class="landing-cta">
@@ -800,7 +812,7 @@ body {
       <button class="active" onclick="showPage('deck')">เริ่มคุย</button>
       <button onclick="showPage('library')">คลังไพ่</button>
       <button onclick="showPage('booking')">จองคุย</button>
-      <button onclick="showPage('admin-tooqta')">Admin</button>
+      <button onclick="showAdminLogin()">Admin</button>
     </div>
   </header>
 
@@ -2240,6 +2252,29 @@ window.showPage = function(id) {
   if(id === 'admin-tooqta') initAdmin();
 };
 
+
+function showAdminLogin(){
+  var m=document.getElementById('adminPasswordModal');
+  m.classList.add('open');
+  document.getElementById('adminPwInput').value='';
+  document.getElementById('adminPwError').style.display='none';
+  setTimeout(function(){document.getElementById('adminPwInput').focus();},100);
+}
+function closeAdminModal(){
+  document.getElementById('adminPasswordModal').classList.remove('open');
+}
+function checkAdminPw(){
+  var pw=document.getElementById('adminPwInput').value;
+  var correct='Yaya2018Cute!';
+  if(pw===correct){
+    closeAdminModal();
+    showPage('admin-tooqta');
+  }else{
+    document.getElementById('adminPwError').style.display='block';
+    document.getElementById('adminPwInput').value='';
+    document.getElementById('adminPwInput').focus();
+  }
+}
 </script>
 
 
@@ -2252,7 +2287,7 @@ window.showPage = function(id) {
         <button onclick="showPage('deck')">เริ่มคุย</button>
         <button onclick="showPage('library')">คลังไพ่</button>
         <button class="active" onclick="showPage('booking')">จองคุย</button>
-        <button onclick="showPage('admin-tooqta')">Admin</button>
+        <button onclick="showAdminLogin()">Admin</button>
       </div>
     </header>
     <div class="booking-wrap">
@@ -2298,6 +2333,17 @@ window.showPage = function(id) {
   </div>
 </div>
 
+<!-- ===== ADMIN PASSWORD MODAL ===== -->
+<div id="adminPasswordModal">
+  <div class="admin-pw-box">
+    <h2>&#128272; Admin</h2>
+    <p>กรุณากรอกรหัสผ่านเพื่อเข้าหน้า Admin</p>
+    <input class="admin-pw-input" id="adminPwInput" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdminPw()"/>
+    <button class="admin-pw-btn" onclick="checkAdminPw()">ยืนยัน</button>
+    <div class="admin-pw-error" id="adminPwError">รหัสผ่านไม่ถูกต้อง ลองใหม่อีกครั้ง</div>
+    <br><button class="admin-pw-cancel" onclick="closeAdminModal()">ยกเลิก</button>
+  </div>
+</div>
 <!-- ===== ADMIN PAGE ===== -->
 <div id="admin-tooqta" class="page">
   <div class="bg-wrapper"></div>
