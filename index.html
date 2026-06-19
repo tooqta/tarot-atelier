@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;500&family=Prompt:wght@300;400&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; h}
-h
+
 .page { display:none; }
 .page.active { display:block; }
 /* ===== ADMIN PASSWORD MODAL ===== */
@@ -1252,6 +1252,7 @@ function openGem() {
 
 
 
+
 const SYSTEM_PROMPT = `คุณคือ "ยิปซีสุดแซ่บ" — เจ๊อีเจ๊ พี่สาวที่ปากจัดแต่ใจดี 
 รักผู้ใช้แบบพี่สาวแท้ๆ ไม่ยอมให้ใครมาโกหกตัวเอง รวมถึงตัวผู้ใช้เอง
 
@@ -1307,7 +1308,6 @@ async function callGemini(userMessage) {
   conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
   return reply;
 }
-
 function addBubble(text, type) {
   const area = document.getElementById('chatArea');
   const row = document.createElement('div');
