@@ -6,11 +6,41 @@
 <title>Tarot Atelier</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;500&family=Prompt:wght@300;400&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+* { margin:0; padding:0; box-sizing:border-box; h}
 
 .page { display:none; }
 .page.active { display:block; }
-h
+/* ===== ADMIN PASSWORD MODAL ===== */
+#adminPasswordModal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;}
+#adminPasswordModal.open{display:flex;}
+.admin-pw-box{background:#fff8f2;border-radius:16px;padding:36px 32px;max-width:340px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.18);text-align:center;font-family:'Noto Serif Thai',serif;}
+.admin-pw-box h2{font-size:20px;color:#5a3e1b;margin-bottom:8px;}
+.admin-pw-box p{font-size:14px;color:#8b6032;margin-bottom:20px;}
+.admin-pw-input{width:100%;padding:10px 14px;border:1.5px solid #c9a96e;border-radius:8px;font-size:15px;margin-bottom:12px;font-family:inherit;outline:none;box-sizing:border-box;}
+.admin-pw-input:focus{border-color:#5a3e1b;}
+.admin-pw-btn{width:100%;padding:11px;background:#5a3e1b;color:#f5e8c8;border:none;border-radius:8px;font-size:15px;cursor:pointer;font-family:inherit;transition:background .2s;}
+.admin-pw-btn:hover{background:#3a2a15;}
+.admin-pw-cancel{margin-top:10px;background:none;border:none;color:#8b6032;font-size:13px;cursor:pointer;font-family:inherit;}
+.admin-pw-error{color:#c0392b;font-size:13px;margin-top:6px;display:none;}
+/* ===== CARD REVEAL MODAL ===== */
+#cardRevealModal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(20,10,5,0.85);justify-content:center;align-items:center;flex-direction:column;gap:16px;}
+#cardRevealModal.open{display:flex;}
+.reveal-card-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;animation:revealFadeIn .45s ease;}
+@keyframes revealFadeIn{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+.reveal-card-img{width:min(340px,55vw);height:min(550px,65vh);border-radius:18px;object-fit:cover;box-shadow:0 8px 40px rgba(0,0,0,0.5);border:3px solid #c9a96e;}
+.reveal-card-placeholder{width:min(340px,55vw);height:min(550px,65vh);border-radius:18px;background:linear-gradient(135deg,#efe5d6,#c9a96e);display:flex;align-items:center;justify-content:center;font-size:60px;box-shadow:0 8px 40px rgba(0,0,0,0.5);}
+.reveal-position-label{font-size:13px;color:#c9a96e;letter-spacing:2px;font-family:'Noto Serif Thai',serif;font-weight:600;}
+.reveal-card-name{font-size:22px;color:#fff8f2;font-family:'Noto Serif Thai',serif;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,0.5);text-align:center;}
+.reveal-counter{font-size:13px;color:rgba(201,169,110,0.6);}
+.reveal-btn-row{display:flex;gap:14px;margin-top:4px;}
+.reveal-next-btn,.reveal-finish-btn{padding:12px 36px;border:none;border-radius:30px;font-size:16px;font-family:'Noto Serif Thai',serif;cursor:pointer;transition:background .2s;box-shadow:0 4px 16px rgba(0,0,0,0.3);}
+.reveal-next-btn{background:#5a3e1b;color:#f5e8c8;}
+.reveal-next-btn:hover{background:#3a2a15;}
+.reveal-finish-btn{background:#7a4e2b;color:#f5e8c8;}
+.reveal-finish-btn:hover{background:#5a3a1b;}
+.reveal-dots{display:flex;gap:8px;}
+.reveal-dot{width:8px;height:8px;border-radius:50%;background:rgba(201,169,110,0.3);transition:background .3s;}
+.reveal-dot.active{background:#c9a96e;}
 /* LANDING */
 #landing {
   font-family:'Prompt',sans-serif;
@@ -31,23 +61,7 @@ h
   display:flex;
   flex-direction:column;
 }
-.landing-header {
-  height:52px;
-  background:rgba(255,255,255,.55);
-  backdrop-filter:blur(14px);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-bottom:1px solid rgba(214,178,105,.2);
-}
-.landing-menu { display:flex; gap:8px; }
-.landing-menu button {
-  border:none; padding:6px 14px; border-radius:999px;
-  background:rgba(244,237,228,.85); cursor:pointer;
-  font-family:'Prompt',sans-serif; color:#6e5d4a; font-size:12px;
-  transition:.2s;
-}
-.landing-menu button:hover { background:rgba(214,178,105,.35); }
+
 .landing-cta {
   display:flex; justify-content:center; align-items:center;
   flex:1; padding-bottom:80px;
@@ -295,7 +309,8 @@ body {
   justify-content:center;
   align-items:center;
   gap:20px;
-  box-shadow:0 8px 32px rgba(0,0,0,.07);
+  box-shad
+.menu button.active { background:rgba(214,178,105,.6); color:#4a3520; font-weight:500; }ow:0 8px 32px rgba(0,0,0,.07);
 }
 
 .selected-cards { display:flex; gap:14px; }
@@ -574,13 +589,13 @@ body {
 .suit-tab:hover:not(.active) { background:#ede0c4; border-color:#7a5228; color:#3a2a15; }
 
 .lib-grid-wrap { flex:1; overflow-y:auto; padding:0 16px 20px; }
-.lib-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; padding-top:8px; }
+.lib-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; padding-top:8px; }
 .lib-card-item { position:relative; cursor:pointer; border-radius:8px; overflow:hidden; border:1px solid rgba(214,178,105,.15); background:rgba(20,14,8,.6); transition:transform .2s, border-color .2s, box-shadow .2s; aspect-ratio:2/3; display:flex; flex-direction:column; }
 .lib-card-item:hover { transform:translateY(-3px); border-color:rgba(214,178,105,.45); box-shadow:0 6px 20px rgba(0,0,0,.4); }
 .lib-card-img { flex:1; overflow:hidden; background:#1a1008; display:flex; align-items:center; justify-content:center; }
 .lib-card-img img { width:100%; height:100%; object-fit:cover; display:block; }
 .lib-card-img .card-emoji { font-size:28px; opacity:.8; }
-.lib-card-foot { padding:5px 6px; border-top:1px solid rgba(214,178,105,.12); }
+.lib-card-foot { display:none }
 .lib-card-name { font-size:10px; color:#c0a060; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .lib-card-kw { font-size:9px; color:#6a5545; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px; }
 .lib-empty { text-align:center; padding:60px 20px; color:#5a4a38; font-size:14px; }
@@ -779,12 +794,13 @@ body {
 <div id="landing" class="page active">
   <div class="landing-bg"></div>
   <div class="landing-content">
-    <header class="landing-header">
-      <div class="landing-menu"><button onclick="showPage('landing')">หน้าหลัก</button>
-        <button>เริ่มคุย</button>
+    <header class="header">
+      <div class="menu">
+        <button class="active" onclick="showPage('landing')">หน้าหลัก</button>
+        <button onclick="showPage('deck')">เริ่มคุย</button>
         <button onclick="showPage('library')">คลังไพ่</button>
         <button onclick="showPage('booking')">จองคุย</button>
-        <button>สนับสนุน Atelier</button>
+        <button onclick="showAdminLogin()">Admin</button>
       </div>
     </header>
     <div class="landing-cta">
@@ -795,7 +811,7 @@ body {
           id="userQuestion"
           type="text"
           placeholder="พิมพ์คำถามของคุณที่นี่..."
-          maxlength="200"
+          maxlength="300"
           onkeydown="if(event.key==='Enter')goToDeck()"
         />
         <button class="start-btn" onclick="goToDeck()">เริ่มดูไพ่</button>
@@ -810,10 +826,11 @@ body {
 
   <header class="header">
     <div class="menu">
-      <button>เริ่มคุย</button>
+      <button onclick="showPage('landing')">หน้าหลัก</button>
+      <button class="active" onclick="showPage('deck')">เริ่มคุย</button>
       <button onclick="showPage('library')">คลังไพ่</button>
       <button onclick="showPage('booking')">จองคุย</button>
-      <button>สนับสนุน Atelier</button>
+      <button onclick="showAdminLogin()">Admin</button>
     </div>
   </header>
 
@@ -1104,6 +1121,15 @@ function updatePanel() {
       // ใส่รูปหลังไพ่
       const img = slot.querySelector('.flip-front img');
       if (img) img.src = cardBackImg.src;
+      // ใส่รูปหน้าไพ่
+      const cardId = deckOrder[arr[i]];
+      const imgFile = cardFiles[cardId];
+      if (imgFile) {
+        const backDiv = slot.querySelector('.flip-back');
+        if (backDiv) {
+          backDiv.innerHTML = `<img src="${CARD_BASE_URL}${imgFile}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit" onerror="this.style.display='none'">`;
+        }
+      }
     } else {
       slot.classList.remove('filled');
       slot.classList.remove('flipped');
@@ -1209,7 +1235,7 @@ function closeModal() {
 
 function doReading() {
   closeModal();
-  startReading(_pendingCardIds);
+  openRevealFromDeck(_pendingCardIds);
 }
 
 function openGem() {
@@ -1225,28 +1251,28 @@ function openGem() {
 }
 
 
-const GEMINI_API_KEY = 'AIzaSyDUONlGDLx-UPkY6e9ZTzvLIoSCgj1D1go'; //
+
 
 const SYSTEM_PROMPT = `คุณคือ "ยิปซีสุดแซ่บ" — เจ๊อีเจ๊ พี่สาวที่ปากจัดแต่ใจดี 
 รักผู้ใช้แบบพี่สาวแท้ๆ ไม่ยอมให้ใครมาโกหกตัวเอง รวมถึงตัวผู้ใช้เอง
 
 [VOICE & TONE]
 - พูดแบบเจ๊สาวไทยที่มีคลาส ไม่ใช่ตลาดนัด
-- ใช้คำว่า "เจ๊" แทนตัวเอง เรียกผู้ใช้ว่า "หนู" หรือ "คุณ" 
+- ใช้คำว่า "เจ๊" แทนตัวเอง เรียกผู้ใช้ว่า "เธอ" หรือ "คุณ" 
 - ประโยคสั้น กระชับ เด็ดขาด ไม่อ้อมค้อม
-- อารมณ์ขันแบบจิกเบาๆ ไม่ใช่จิกให้เจ็บ
+- อารมณ์ขันแบบจิกเบาๆ Red Pill ไม่ใช่จิกให้เจ็บ
 - ห้ามพูดอวย ห้ามพูดน้ำเน่า ห้ามพูดกว้างๆ คลุมเครือ
 
 [ตัวอย่าง voice ที่ถูกต้อง]
 ❌ "ไพ่ใบนี้บ่งบอกถึงการเปลี่ยนแปลงที่กำลังจะมาถึง..."
-✅ "เจ๊เห็นไพ่แล้วนะ หนูกำลังรอให้อะไรบางอย่างเปลี่ยน 
-แต่มันจะไม่เปลี่ยนถ้าหนูยังนั่งรออยู่คนเดียว"
+✅ "เจ๊เห็นไพ่แล้วนะ เธอกำลังรอให้อะไรบางอย่างเปลี่ยน 
+แต่มันจะไม่เปลี่ยนถ้าเธอยังนั่งรออยู่คนเดียว"
 
 [การอ่านไพ่ 4 ตำแหน่ง]
 ตำแหน่ง 1 — เหตุการณ์ปัจจุบัน: หนูอยู่ตรงไหน
 ตำแหน่ง 2 — ปัญหา: อะไรที่กำลังขวางอยู่
 ตำแหน่ง 3 — คำแนะนำ: เจ๊บอกให้ทำอะไร
-ตำแหน่ง 4 — บทสรุป: ถ้าหนูทำตาม ผลลัพธ์คืออะไร
+ตำแหน่ง 4 — บทสรุป: ภาพรวม
 
 [วิธีอ่านไพ่]
 - ดูรูปบนไพ่จริงๆ อธิบายสัญลักษณ์ที่เห็น
@@ -1256,7 +1282,7 @@ const SYSTEM_PROMPT = `คุณคือ "ยิปซีสุดแซ่บ"
 [ปิดท้ายทุกครั้ง — สำคัญมาก]
 หลังอ่านไพ่ครบ 4 ใบแล้ว ต้องถามคำถาม coaching 1 ข้อเสมอ
 คำถามต้องให้ผู้ใช้หยุดคิดจริงๆ ไม่ใช่ตอบแค่ใช่/ไม่ใช่
-ตัวอย่าง: "แล้วหนูรู้อยู่แล้วว่าต้องทำอะไร แต่กลัวอะไรอยู่กันแน่?"`;
+ตัวอย่าง: "แล้วเธอรู้อยู่แล้วว่าต้องทำอะไร แต่กลัวอะไรอยู่กันแน่?"`;
 
 const cardNames = ['ปัจจุบัน','ปัญหา','แนะนำ','สรุป'];
 let conversationHistory = [];
@@ -1266,22 +1292,22 @@ async function callGemini(userMessage) {
   conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
 
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+    'https://zbdqwhrspcrcfnidtior.supabase.co/functions/v1/gemini-tarot',
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-        contents: conversationHistory
+        question: userQuestion,
+        cards: _pendingCardIds.map((id, i) => `${cardNames[i]}: ${CARD_DATA[id]?.name_th||id}`)
       })
     }
   );
+
   const data = await res.json();
-  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ';
+  const reply = data.result || 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ';
   conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
   return reply;
 }
-
 function addBubble(text, type) {
   const area = document.getElementById('chatArea');
   const row = document.createElement('div');
@@ -2244,6 +2270,123 @@ window.showPage = function(id) {
   if(id === 'admin-tooqta') initAdmin();
 };
 
+
+function showAdminLogin(){
+  var m=document.getElementById('adminPasswordModal');
+  m.classList.add('open');
+  document.getElementById('adminPwInput').value='';
+  document.getElementById('adminPwError').style.display='none';
+  setTimeout(function(){document.getElementById('adminPwInput').focus();},100);
+}
+function closeAdminModal(){
+  document.getElementById('adminPasswordModal').classList.remove('open');
+}
+function checkAdminPw(){
+  var pw=document.getElementById('adminPwInput').value;
+  var correct='Yaya2018Cute!';
+  if(pw===correct){
+    closeAdminModal();
+    showPage('admin-tooqta');
+  }else{
+    document.getElementById('adminPwError').style.display='block';
+    document.getElementById('adminPwInput').value='';
+    document.getElementById('adminPwInput').focus();
+  }
+}
+
+/* ===== CARD REVEAL LOGIC ===== */
+var _revealCards = [];
+var _revealIdx = 0;
+var _revealCallback = null;
+
+function showCardReveal(cards, onFinish) {
+  _revealCards = cards;
+  _revealIdx = 0;
+  _revealCallback = onFinish;
+  var modal = document.getElementById('cardRevealModal');
+  modal.classList.add('open');
+  buildRevealDots();
+  showRevealCard(_revealIdx);
+}
+
+function buildRevealDots() {
+  var dots = document.getElementById('revealDots');
+  dots.innerHTML = '';
+  _revealCards.forEach(function(_, i) {
+    var d = document.createElement('div');
+    d.className = 'reveal-dot' + (i === 0 ? ' active' : '');
+    dots.appendChild(d);
+  });
+}
+
+function showRevealCard(idx) {
+  var card = _revealCards[idx];
+  var wrap = document.getElementById('revealCardWrap');
+  wrap.style.animation = 'none';
+  wrap.offsetHeight;
+  wrap.style.animation = '';
+
+  document.getElementById('revealPositionLabel').textContent = card.position || '';
+  document.getElementById('revealCardName').textContent = card.name || '';
+  document.getElementById('revealCounter').textContent = (idx + 1) + ' / ' + _revealCards.length;
+
+  var holder = document.getElementById('revealImgHolder');
+  holder.innerHTML = '';
+  if (card.imgSrc) {
+    var img = document.createElement('img');
+    img.className = 'reveal-card-img';
+    img.src = card.imgSrc;
+    img.onerror = function() {
+      var ph = document.createElement('div');
+      ph.className = 'reveal-card-placeholder';
+      ph.textContent = String.fromCharCode(10024);
+      holder.replaceChild(ph, img);
+    };
+    holder.appendChild(img);
+  } else {
+    var ph = document.createElement('div');
+    ph.className = 'reveal-card-placeholder';
+    ph.textContent = String.fromCharCode(10024);
+    holder.appendChild(ph);
+  }
+
+  document.querySelectorAll('.reveal-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === idx);
+  });
+
+  var isLast = idx >= _revealCards.length - 1;
+  document.getElementById('revealNextBtn').style.display = isLast ? 'none' : '';
+  document.getElementById('revealFinishBtn').style.display = isLast ? '' : 'none';
+}
+
+function revealNext() {
+  if (_revealIdx < _revealCards.length - 1) {
+    _revealIdx++;
+    showRevealCard(_revealIdx);
+  }
+}
+
+function revealFinish() {
+  document.getElementById('cardRevealModal').classList.remove('open');
+  if (typeof _revealCallback === 'function') _revealCallback();
+}
+
+function openRevealFromDeck(cardIds) {
+  var slots = document.querySelectorAll('.slot-wrapper');
+  var cards = cardIds.map(function(id, i) {
+    var wrapper = slots[i];
+    var backImg = wrapper ? wrapper.querySelector('.flip-back img') : null;
+    var lbl = wrapper ? wrapper.querySelector('.slot-label') : null;
+    return {
+      position: lbl ? lbl.textContent.trim() : ('ใบที่ ' + (i+1)),
+      name: '',
+      imgSrc: backImg ? backImg.src : null
+    };
+  });
+  showCardReveal(cards, function() {
+    startReading(cardIds);
+  });
+}
 </script>
 
 
@@ -2252,10 +2395,11 @@ window.showPage = function(id) {
   <div class="content">
     <header class="header">
       <div class="menu">
+        <button onclick="showPage('landing')">หน้าหลัก</button>
         <button onclick="showPage('deck')">เริ่มคุย</button>
         <button onclick="showPage('library')">คลังไพ่</button>
-        <button onclick="showPage('booking')" class="active">จองคุย</button>
-        <button>สนับสนุน Atelier</button>
+        <button class="active" onclick="showPage('booking')">จองคุย</button>
+        <button onclick="showAdminLogin()">Admin</button>
       </div>
     </header>
     <div class="booking-wrap">
@@ -2301,6 +2445,32 @@ window.showPage = function(id) {
   </div>
 </div>
 
+
+<!-- ===== CARD REVEAL MODAL ===== -->
+<div id="cardRevealModal">
+  <div class="reveal-dots" id="revealDots"></div>
+  <div class="reveal-card-wrap" id="revealCardWrap">
+    <div class="reveal-position-label" id="revealPositionLabel"></div>
+    <div id="revealImgHolder"></div>
+    <div class="reveal-card-name" id="revealCardName"></div>
+    <div class="reveal-counter" id="revealCounter"></div>
+    <div class="reveal-btn-row">
+      <button class="reveal-next-btn" id="revealNextBtn" onclick="revealNext()">ถัดไป ›</button>
+      <button class="reveal-finish-btn" id="revealFinishBtn" onclick="revealFinish()" style="display:none">เข้าสู่การทำนาย &#10024;</button>
+    </div>
+  </div>
+</div>
+<!-- ===== ADMIN PASSWORD MODAL ===== -->
+<div id="adminPasswordModal">
+  <div class="admin-pw-box">
+    <h2>&#128272; Admin</h2>
+    <p>กรุณากรอกรหัสผ่านเพื่อเข้าหน้า Admin</p>
+    <input class="admin-pw-input" id="adminPwInput" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdminPw()"/>
+    <button class="admin-pw-btn" onclick="checkAdminPw()">ยืนยัน</button>
+    <div class="admin-pw-error" id="adminPwError">รหัสผ่านไม่ถูกต้อง ลองใหม่อีกครั้ง</div>
+    <br><button class="admin-pw-cancel" onclick="closeAdminModal()">ยกเลิก</button>
+  </div>
+</div>
 <!-- ===== ADMIN PAGE ===== -->
 <div id="admin-tooqta" class="page">
   <div class="bg-wrapper"></div>
