@@ -2121,14 +2121,17 @@ function revealFinish() {
 
 function openRevealFromDeck(cardIds) {
   var slots = document.querySelectorAll('.slot-wrapper');
+  var positions = ['ปัจจุบัน', 'ปัญหา', 'แนะนำ', 'สรุป'];
   var cards = cardIds.map(function(id, i) {
     var wrapper = slots[i];
-    var backImg = wrapper ? wrapper.querySelector('.flip-back img') : null;
     var lbl = wrapper ? wrapper.querySelector('.slot-label') : null;
+    var imgFile = (typeof cardFiles !== 'undefined') ? cardFiles[parseInt(id)] : null;
+    var imgUrl = imgFile ? CARD_BASE_URL + imgFile : null;
+    var cd = (typeof CARD_DATA !== 'undefined') ? CARD_DATA[id] : null;
     return {
-      position: lbl ? lbl.textContent.trim() : ('ใบที่ ' + (i+1)),
-      name: '',
-      imgSrc: backImg ? backImg.src : null
+      position: lbl ? lbl.textContent.trim() : (positions[i] || ('ใบที่ ' + (i + 1))),
+      name: cd ? (cd.name_th || cd.name || '') : '',
+      imgSrc: imgUrl
     };
   });
   showCardReveal(cards, function() {
