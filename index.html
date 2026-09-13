@@ -836,7 +836,7 @@ body {
     </header>
     <div class="landing-cta">
       <div class="question-box">
-        <div class="question-label">✦ วันนี้อยากถามเรื่องอะไร?</div>
+        <div class="question-label">✦ วันนี้อยากถามเรื่องอะไรกับเจ๊?</div>
         <input
           class="question-input"
           id="userQuestion"
@@ -890,7 +890,7 @@ body {
 <circle cx="56" cy="238" r="4" fill="#b89563" opacity=".4"/>
 <path d="M130,265 Q145,250 142,235 Q140,218 150,210" fill="none" stroke="#b89563" stroke-width="1.2" opacity=".5"/>
 <circle cx="144" cy="238" r="4" fill="#b89563" opacity=".4"/>
-</svg></div><div class="flip-inner"><div class="flip-front"><img id="slotImg0" src=""></div><div class="flip-back">✦</div></div></div>
+</svg></div><div class="flip-inner"><div class="flip-front"><img id="slotImg0" src=""></div><div class="flip-back"><img id="slotBackImg0" src="" style="display:none" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="flip-back-fallback" style="display:flex">✦</span></div></div></div>
         <div class="slot-label">ปัจจุบัน</div>
       </div>
       <div class="slot-wrapper">
@@ -914,7 +914,7 @@ body {
 <circle cx="56" cy="238" r="4" fill="#b89563" opacity=".4"/>
 <path d="M130,265 Q145,250 142,235 Q140,218 150,210" fill="none" stroke="#b89563" stroke-width="1.2" opacity=".5"/>
 <circle cx="144" cy="238" r="4" fill="#b89563" opacity=".4"/>
-</svg></div><div class="flip-inner"><div class="flip-front"><img id="slotImg1" src=""></div><div class="flip-back">✦</div></div></div>
+</svg></div><div class="flip-inner"><div class="flip-front"><img id="slotImg1" src=""></div><div class="flip-back"><img id="slotBackImg1" src="" style="display:none" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="flip-back-fallback" style="display:flex">✦</span></div></div></div>
         <div class="slot-label">ปัญหา</div>
       </div>
       <div class="slot-wrapper">
@@ -938,7 +938,7 @@ body {
 <circle cx="56" cy="238" r="4" fill="#b89563" opacity=".4"/>
 <path d="M130,265 Q145,250 142,235 Q140,218 150,210" fill="none" stroke="#b89563" stroke-width="1.2" opacity=".5"/>
 <circle cx="144" cy="238" r="4" fill="#b89563" opacity=".4"/>
-</svg></div><div class="flip-inner"><div class="flip-front"><img id="slotImg2" src=""></div><div class="flip-back">✦</div></div></div>
+</svg></div><div class="flip-inner"><div class="flip-front"><img id="slotImg2" src=""></div><div class="flip-back"><img id="slotBackImg2" src="" style="display:none" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="flip-back-fallback" style="display:flex">✦</span></div></div></div>
         <div class="slot-label">แนะนำ</div>
       </div>
       <div class="slot-wrapper">
@@ -962,7 +962,7 @@ body {
 <circle cx="56" cy="238" r="4" fill="#b89563" opacity=".4"/>
 <path d="M130,265 Q145,250 142,235 Q140,218 150,210" fill="none" stroke="#b89563" stroke-width="1.2" opacity=".5"/>
 <circle cx="144" cy="238" r="4" fill="#b89563" opacity=".4"/>
-</svg></div><div class="flip-inner"><div class="flip-front"><img id="slotImg3" src=""></div><div class="flip-back">✦</div></div></div>
+</svg></div><div class="flip-inner"><div class="flip-front"><img id="slotImg3" src=""></div><div class="flip-back"><img id="slotBackImg3" src="" style="display:none" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="flip-back-fallback" style="display:flex">✦</span></div></div></div>
         <div class="slot-label">สรุป</div>
       </div>
     </div>
@@ -1304,6 +1304,15 @@ document.getElementById('shuffleBtn').addEventListener('click', () => {
   document.querySelectorAll('.selected-slot').forEach(s => {
     s.classList.remove('filled','flipped');
   });
+  for (let i = 0; i < 4; i++) {
+    const backImg = document.getElementById('slotBackImg' + i);
+    if (backImg) {
+      backImg.src = '';
+      backImg.style.display = 'none';
+      const fallback = backImg.nextElementSibling;
+      if (fallback) fallback.style.display = 'flex';
+    }
+  }
   document.getElementById('openBtn').textContent = 'เลือกให้ครบ 4 ใบ';
   document.getElementById('openBtn').classList.remove('active');
   document.getElementById('openBtn').dataset.state = '';
@@ -1387,8 +1396,22 @@ document.getElementById('openBtn').addEventListener('click', () => {
     return;
   }
 
+  // เตรียมรูปไพ่จริงของแต่ละใบที่เลือกไว้ ก่อนพลิกเปิด
+  const selectedIdxArr = [...selectedSet];
   const slots = document.querySelectorAll('.selected-slot.filled');
   slots.forEach((slot, i) => {
+    const cardId = deckOrder[selectedIdxArr[i]];
+    const imgFile = (typeof cardFiles !== 'undefined') ? cardFiles[parseInt(cardId)] : null;
+    const imgUrl = imgFile ? CARD_BASE_URL + imgFile : null;
+    const backImg = document.getElementById('slotBackImg' + i);
+    if (backImg && imgUrl) {
+      backImg.src = imgUrl;
+      backImg.style.display = 'block';
+      backImg.style.cursor = 'zoom-in';
+      backImg.onclick = function() { if (typeof openCardZoom === 'function') openCardZoom(imgUrl); };
+      const fallback = backImg.nextElementSibling;
+      if (fallback) fallback.style.display = 'none';
+    }
     setTimeout(() => {
       slot.classList.add('flipped');
     }, i * 300);
@@ -1465,7 +1488,7 @@ document.getElementById('openBtn').addEventListener('click', () => {
     <div class="modal-divider">หรือ</div>
 
     <button class="modal-btn modal-btn-gem" onclick="openGem()">
-      💬 คุยกับ Gem log in ก่อนนะ
+      💬 คุยกับ Gem ฟรีเลย!
     </button>
 
     <button class="modal-btn modal-btn-cancel" onclick="closeModal()">
