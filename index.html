@@ -1032,7 +1032,7 @@ function openGem() {
   closeModal();
   const positions = ['ปัจจุบัน','ปัญหา','แนะนำ','สรุป'];
   const prompt = (userQuestion ? `คำถามของฉัน: "${userQuestion}"\n\n` : '') +
-    `ฉันจับไพ่ทาโรต์ได้ 4 ใบวันนี้ค่ะ:\n` +
+    `ฉันจับไพ่ทาโรต์ได้ 4 ใบวันนี้ค่ะ: คำถามของฉันคือ......\n` +
     _pendingCardIds.map((id, i) => `- ตำแหน่ง${positions[i]}: ${CARD_DATA[id]?.name||id} (${CARD_DATA[id]?.name_th||""})`).join('\n') +
     `\n\nช่วยอ่านไพ่และให้คำแนะนำหน่อยนะคะ`;
   const gemUrl = `https://gemini.google.com/gem/1qvi4MOxn4azSad0Lk-UAmO4IBemKR9IO?usp=sharing`;
