@@ -1,0 +1,470 @@
+[
+ {
+  "id": 0,
+  "name": "The Fool",
+  "name_th": "ผู้เริ่มต้น",
+  "image": "https://tooqta.github.io/tarot-atelier/0.png"
+ },
+ {
+  "id": 1,
+  "name": "The Magician",
+  "name_th": "นักมายากล",
+  "image": "https://tooqta.github.io/tarot-atelier/1.png"
+ },
+ {
+  "id": 2,
+  "name": "The High Priestess",
+  "name_th": "นักบวชหญิง",
+  "image": "https://tooqta.github.io/tarot-atelier/2.png"
+ },
+ {
+  "id": 3,
+  "name": "The Empress",
+  "name_th": "จักรพรรดินี",
+  "image": "https://tooqta.github.io/tarot-atelier/3.png"
+ },
+ {
+  "id": 4,
+  "name": "The Emperor",
+  "name_th": "จักรพรรดิ",
+  "image": "https://tooqta.github.io/tarot-atelier/4.png"
+ },
+ {
+  "id": 5,
+  "name": "The Hierophant",
+  "name_th": "นักบวช",
+  "image": "https://tooqta.github.io/tarot-atelier/5.png"
+ },
+ {
+  "id": 6,
+  "name": "The Lovers",
+  "name_th": "คู่รัก",
+  "image": "https://tooqta.github.io/tarot-atelier/6.png"
+ },
+ {
+  "id": 7,
+  "name": "The Chariot",
+  "name_th": "รถศึก",
+  "image": "https://tooqta.github.io/tarot-atelier/7.png"
+ },
+ {
+  "id": 8,
+  "name": "Strength",
+  "name_th": "ความแข็งแกร่ง",
+  "image": "https://tooqta.github.io/tarot-atelier/8.png"
+ },
+ {
+  "id": 9,
+  "name": "The Hermit",
+  "name_th": "ฤๅษี",
+  "image": "https://tooqta.github.io/tarot-atelier/9.png"
+ },
+ {
+  "id": 10,
+  "name": "Wheel of Fortune",
+  "name_th": "วงล้อแห่งโชคชะตา",
+  "image": "https://tooqta.github.io/tarot-atelier/10.png"
+ },
+ {
+  "id": 11,
+  "name": "Justice",
+  "name_th": "ความยุติธรรม",
+  "image": "https://tooqta.github.io/tarot-atelier/11.png"
+ },
+ {
+  "id": 12,
+  "name": "The Hanged Man",
+  "name_th": "คนถูกแขวน",
+  "image": "https://tooqta.github.io/tarot-atelier/12.png"
+ },
+ {
+  "id": 13,
+  "name": "Death",
+  "name_th": "ความตาย",
+  "image": "https://tooqta.github.io/tarot-atelier/13.png"
+ },
+ {
+  "id": 14,
+  "name": "Temperance",
+  "name_th": "ความพอดี",
+  "image": "https://tooqta.github.io/tarot-atelier/14.png"
+ },
+ {
+  "id": 15,
+  "name": "The Devil",
+  "name_th": "ซาตาน",
+  "image": "https://tooqta.github.io/tarot-atelier/15.png"
+ },
+ {
+  "id": 16,
+  "name": "The Tower",
+  "name_th": "หอคอย",
+  "image": "https://tooqta.github.io/tarot-atelier/16.png"
+ },
+ {
+  "id": 17,
+  "name": "The Star",
+  "name_th": "ดาว",
+  "image": "https://tooqta.github.io/tarot-atelier/17.png"
+ },
+ {
+  "id": 18,
+  "name": "The Moon",
+  "name_th": "พระจันทร์",
+  "image": "https://tooqta.github.io/tarot-atelier/18.png"
+ },
+ {
+  "id": 19,
+  "name": "The Sun",
+  "name_th": "ดวงอาทิตย์",
+  "image": "https://tooqta.github.io/tarot-atelier/19.png"
+ },
+ {
+  "id": 20,
+  "name": "Judgement",
+  "name_th": "การพิพากษา",
+  "image": "https://tooqta.github.io/tarot-atelier/20.png"
+ },
+ {
+  "id": 21,
+  "name": "The World",
+  "name_th": "โลก",
+  "image": "https://tooqta.github.io/tarot-atelier/21.png"
+ },
+ {
+  "id": 22,
+  "name": "Ace of Cups",
+  "name_th": "เอซถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c1.png"
+ },
+ {
+  "id": 23,
+  "name": "2 of Cups",
+  "name_th": "สองถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c2.png"
+ },
+ {
+  "id": 24,
+  "name": "3 of Cups",
+  "name_th": "สามถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c3.png"
+ },
+ {
+  "id": 25,
+  "name": "4 of Cups",
+  "name_th": "สี่ถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c4.png"
+ },
+ {
+  "id": 26,
+  "name": "5 of Cups",
+  "name_th": "ห้าถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c5.png"
+ },
+ {
+  "id": 27,
+  "name": "6 of Cups",
+  "name_th": "หกถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c6.png"
+ },
+ {
+  "id": 28,
+  "name": "7 of Cups",
+  "name_th": "เจ็ดถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c7.png"
+ },
+ {
+  "id": 29,
+  "name": "8 of Cups",
+  "name_th": "แปดถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c8.png"
+ },
+ {
+  "id": 30,
+  "name": "9 of Cups",
+  "name_th": "เก้าถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c9.png"
+ },
+ {
+  "id": 31,
+  "name": "10 of Cups",
+  "name_th": "สิบถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/c10.png"
+ },
+ {
+  "id": 32,
+  "name": "Page of Cups",
+  "name_th": "เด็กถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/ckn.png"
+ },
+ {
+  "id": 33,
+  "name": "Knight of Cups",
+  "name_th": "อัศวินถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/cp.png"
+ },
+ {
+  "id": 34,
+  "name": "Queen of Cups",
+  "name_th": "ราชินีถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/cq.png"
+ },
+ {
+  "id": 35,
+  "name": "King of Cups",
+  "name_th": "กษัตริย์ถ้วย",
+  "image": "https://tooqta.github.io/tarot-atelier/ck.png"
+ },
+ {
+  "id": 36,
+  "name": "Ace of Wands",
+  "name_th": "เอซไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w1.png"
+ },
+ {
+  "id": 37,
+  "name": "2 of Wands",
+  "name_th": "สองไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w2.png"
+ },
+ {
+  "id": 38,
+  "name": "3 of Wands",
+  "name_th": "สามไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w3.png"
+ },
+ {
+  "id": 39,
+  "name": "4 of Wands",
+  "name_th": "สี่ไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w4.png"
+ },
+ {
+  "id": 40,
+  "name": "5 of Wands",
+  "name_th": "ห้าไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w5.png"
+ },
+ {
+  "id": 41,
+  "name": "6 of Wands",
+  "name_th": "หกไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w6.png"
+ },
+ {
+  "id": 42,
+  "name": "7 of Wands",
+  "name_th": "เจ็ดไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w7.png"
+ },
+ {
+  "id": 43,
+  "name": "8 of Wands",
+  "name_th": "แปดไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w8.png"
+ },
+ {
+  "id": 44,
+  "name": "9 of Wands",
+  "name_th": "เก้าไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w9.png"
+ },
+ {
+  "id": 45,
+  "name": "10 of Wands",
+  "name_th": "สิบไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/w10.png"
+ },
+ {
+  "id": 46,
+  "name": "Page of Wands",
+  "name_th": "เด็กไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/wkn.png"
+ },
+ {
+  "id": 47,
+  "name": "Knight of Wands",
+  "name_th": "อัศวินไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/wp.png"
+ },
+ {
+  "id": 48,
+  "name": "Queen of Wands",
+  "name_th": "ราชินีไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/wq.png"
+ },
+ {
+  "id": 49,
+  "name": "King of Wands",
+  "name_th": "กษัตริย์ไม้",
+  "image": "https://tooqta.github.io/tarot-atelier/wk.png"
+ },
+ {
+  "id": 50,
+  "name": "Ace of Swords",
+  "name_th": "เอซดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s1.png"
+ },
+ {
+  "id": 51,
+  "name": "2 of Swords",
+  "name_th": "สองดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s2.png"
+ },
+ {
+  "id": 52,
+  "name": "3 of Swords",
+  "name_th": "สามดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s3.png"
+ },
+ {
+  "id": 53,
+  "name": "4 of Swords",
+  "name_th": "สี่ดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s4.png"
+ },
+ {
+  "id": 54,
+  "name": "5 of Swords",
+  "name_th": "ห้าดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s5.png"
+ },
+ {
+  "id": 55,
+  "name": "6 of Swords",
+  "name_th": "หกดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s6.png"
+ },
+ {
+  "id": 56,
+  "name": "7 of Swords",
+  "name_th": "เจ็ดดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s7.png"
+ },
+ {
+  "id": 57,
+  "name": "8 of Swords",
+  "name_th": "แปดดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s8.png"
+ },
+ {
+  "id": 58,
+  "name": "9 of Swords",
+  "name_th": "เก้าดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s9.png"
+ },
+ {
+  "id": 59,
+  "name": "10 of Swords",
+  "name_th": "สิบดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/s10.png"
+ },
+ {
+  "id": 60,
+  "name": "Page of Swords",
+  "name_th": "เด็กดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/skn.png"
+ },
+ {
+  "id": 61,
+  "name": "Knight of Swords",
+  "name_th": "อัศวินดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/sp.png"
+ },
+ {
+  "id": 62,
+  "name": "Queen of Swords",
+  "name_th": "ราชินีดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/sq.png"
+ },
+ {
+  "id": 63,
+  "name": "King of Swords",
+  "name_th": "กษัตริย์ดาบ",
+  "image": "https://tooqta.github.io/tarot-atelier/sk.png"
+ },
+ {
+  "id": 64,
+  "name": "Ace of Pentacles",
+  "name_th": "เอซเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/P1.png"
+ },
+ {
+  "id": 65,
+  "name": "2 of Pentacles",
+  "name_th": "สองเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/p2.png"
+ },
+ {
+  "id": 66,
+  "name": "3 of Pentacles",
+  "name_th": "สามเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/p3.png"
+ },
+ {
+  "id": 67,
+  "name": "4 of Pentacles",
+  "name_th": "สี่เหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/p4.png"
+ },
+ {
+  "id": 68,
+  "name": "5 of Pentacles",
+  "name_th": "ห้าเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/p5.png"
+ },
+ {
+  "id": 69,
+  "name": "6 of Pentacles",
+  "name_th": "หกเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/p6.png"
+ },
+ {
+  "id": 70,
+  "name": "7 of Pentacles",
+  "name_th": "เจ็ดเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/p7.png"
+ },
+ {
+  "id": 71,
+  "name": "8 of Pentacles",
+  "name_th": "แปดเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/p8.png"
+ },
+ {
+  "id": 72,
+  "name": "9 of Pentacles",
+  "name_th": "เก้าเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/p9.png"
+ },
+ {
+  "id": 73,
+  "name": "10 of Pentacles",
+  "name_th": "สิบเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/p10.png"
+ },
+ {
+  "id": 74,
+  "name": "Page of Pentacles",
+  "name_th": "เด็กเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/pkn.png"
+ },
+ {
+  "id": 75,
+  "name": "Knight of Pentacles",
+  "name_th": "อัศวินเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/pp.png"
+ },
+ {
+  "id": 76,
+  "name": "Queen of Pentacles",
+  "name_th": "ราชินีเหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/pq.png"
+ },
+ {
+  "id": 77,
+  "name": "King of Pentacles",
+  "name_th": "กษัตริย์เหรียญ",
+  "image": "https://tooqta.github.io/tarot-atelier/pk.png"
+ }
+]
