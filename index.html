@@ -1136,7 +1136,8 @@ function showReadingError(bubble) {
   bubble.classList.remove('loading');
   bubble.innerHTML = 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ 🙏<br>หรือจะลองไปคุยกับเจ๊ยิปซีได้ที่ ' +
     '<a href="https://tarot-real-talk-coach.ai.studio/" target="_blank" rel="noopener" ' +
-    'onclick="openGem(); return false;" style="color:#a0702a;font-weight:600;text-decoration:underline;">สำนักนี้ ✨</a>';
+    'onclick="openGem(); return false;" style="color:#a0702a;font-weight:600;text-decoration:underline;">สำนักนี้ ✨</a>' +
+    '<br><span style="font-size:.85em;opacity:.8;">กดแล้วจะคัดลอกชื่อไพ่ 4 ใบให้อัตโนมัติ เอาไปวางที่สำนักเจ๊ยิปซีได้เลย</span>';
 }
 function addBubble(text, type) {
   const area = document.getElementById('chatArea');
