@@ -1126,11 +1126,17 @@ async function callGemini(userMessage) {
   if (!data.result) {
     conversationHistory.pop();
     console.error('gemini-tarot error', res.status, data);
-    return 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ 🙏' + (data.error ? '\n(' + data.error + ')' : '');
+    throw new Error(data.error || ('HTTP ' + res.status));
   }
   const reply = data.result;
   conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
   return reply;
+}
+function showReadingError(bubble) {
+  bubble.classList.remove('loading');
+  bubble.innerHTML = 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ 🙏<br>หรือจะลองไปคุยกับเจ๊ยิปซีได้ที่ ' +
+    '<a href="https://tarot-real-talk-coach.ai.studio/" target="_blank" rel="noopener" ' +
+    'onclick="openGem(); return false;" style="color:#a0702a;font-weight:600;text-decoration:underline;">สำนักนี้ ✨</a>';
 }
 function addBubble(text, type) {
   const area = document.getElementById('chatArea');
@@ -1208,8 +1214,8 @@ async function startReading(cardIds) {
     loadingBubble.textContent = reply;
     loadingBubble.classList.remove('loading');
   } catch(e) {
-    loadingBubble.textContent = 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ 🙏';
-    loadingBubble.classList.remove('loading');
+    console.error(e);
+    showReadingError(loadingBubble);
   }
 }
 
@@ -1227,8 +1233,8 @@ async function askMore() {
     loadingBubble.textContent = reply;
     loadingBubble.classList.remove('loading');
   } catch(e) {
-    loadingBubble.textContent = 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ';
-    loadingBubble.classList.remove('loading');
+    console.error(e);
+    showReadingError(loadingBubble);
   }
   document.getElementById('chatArea').scrollTop = document.getElementById('chatArea').scrollHeight;
 }
