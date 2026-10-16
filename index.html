@@ -1058,7 +1058,7 @@ function openGem() {
     `ฉันจับไพ่ทาโรต์ได้ 4 ใบวันนี้ค่ะ:\n` +
     _pendingCardIds.map((id, i) => `- ตำแหน่ง${positions[i]}: ${CARD_DATA[id]?.name||id} (${CARD_DATA[id]?.name_th||""})`).join('\n') +
     `\n\nช่วยอ่านไพ่และให้คำแนะนำหน่อยนะคะ`;
-  const gemUrl = `https://ai.studio/apps/1afb955f-f753-40d5-954d-978ab9b026d8`;
+  const gemUrl = `https://tarot-real-talk-coach.ai.studio/`;
   navigator.clipboard.writeText(prompt).catch(()=>{});
   window.open(gemUrl, '_blank');
 }
@@ -1515,7 +1515,7 @@ document.getElementById('openBtn').addEventListener('click', () => {
     <div class="modal-divider">หรือ</div>
 
     <button class="modal-btn modal-btn-gem" onclick="openGem()">
-      💬 คุยกับเจ๊ยิปซี (ต้อง log in Google)
+      💬 คุยกับเจ๊ยิปซี
     </button>
     <div style="font-size:12px;opacity:.75;margin:-4px 0 10px;text-align:center;">คัดลอกชื่อไพ่ไว้ให้แล้ว เปิดแอปแล้วกด "วาง" ในช่องแชตได้เลย</div>
 
