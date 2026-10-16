@@ -1115,13 +1115,20 @@ async function callGemini(userMessage) {
       },
       body: JSON.stringify({
         question: userQuestion,
-        cards: _pendingCardIds.map((id, i) => `${cardNames[i]}: ${CARD_DATA[id]?.name_th||id}`)
+        cards: _pendingCardIds.map((id, i) => `${cardNames[i]}: ${CARD_DATA[id]?.name_th||id}`),
+        system: typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : undefined,
+        history: conversationHistory
       })
     }
   );
 
-  const data = await res.json();
-  const reply = data.result || 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ';
+  const data = await res.json().catch(() => ({}));
+  if (!data.result) {
+    conversationHistory.pop();
+    console.error('gemini-tarot error', res.status, data);
+    return 'เกิดข้อผิดพลาด ลองใหม่นะจ๊ะ 🙏' + (data.error ? '\n(' + data.error + ')' : '');
+  }
+  const reply = data.result;
   conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
   return reply;
 }
@@ -1188,6 +1195,7 @@ async function startReading(cardIds) {
 
   // clear chat
   document.getElementById('chatArea').innerHTML = '';
+  conversationHistory = [];
 
   // loading bubble
   const loadingBubble = addBubble('🔮 เจ๊กำลังอ่านไพ่อยู่นะจ๊ะ...', 'ai loading');
